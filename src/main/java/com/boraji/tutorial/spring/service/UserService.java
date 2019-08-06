@@ -1,10 +1,12 @@
 package com.boraji.tutorial.spring.service;
 
+import model.User;
+
 import java.util.List;
 
-import com.boraji.tutorial.spring.entity.User;
-
 public interface UserService {
-    void add(User user);
+
+    void getUserByLogin(User user);
+
     List<User> listUsers();
 }
