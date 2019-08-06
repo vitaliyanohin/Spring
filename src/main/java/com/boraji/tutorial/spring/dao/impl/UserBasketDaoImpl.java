@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class UserBasketHibDaoImpl implements UserBoxDao {
+public class UserBasketDaoImpl implements UserBoxDao {
 
   private final SessionFactory sessionFactory;
   private static final String GET_BASKET = "FROM Basket WHERE user_id = :id AND available= 'true'";
 
-  public UserBasketHibDaoImpl(SessionFactory sessionFactory) {
+  public UserBasketDaoImpl(SessionFactory sessionFactory) {
     this.sessionFactory = sessionFactory;
   }
 

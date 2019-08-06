@@ -8,11 +8,11 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class OrderDaoHibImpl implements OrderDao {
+public class OrderDaoImpl implements OrderDao {
 
   private final SessionFactory sessionFactory;
 
-  public OrderDaoHibImpl(SessionFactory sessionFactory) {
+  public OrderDaoImpl(SessionFactory sessionFactory) {
     this.sessionFactory = sessionFactory;
   }
 

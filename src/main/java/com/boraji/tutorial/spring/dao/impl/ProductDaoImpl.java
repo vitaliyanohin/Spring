@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ProductHibDaoImpl implements ProductDao {
+public class ProductDaoImpl implements ProductDao {
 
   private final SessionFactory sessionFactory;
 
-  public ProductHibDaoImpl(SessionFactory sessionFactory) {
+  public ProductDaoImpl(SessionFactory sessionFactory) {
     this.sessionFactory = sessionFactory;
   }
 
