@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "product_Hibernate")
+@Table(name = "product")
 public class Product {
 
   @Id

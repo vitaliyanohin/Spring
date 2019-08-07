@@ -12,7 +12,7 @@
 </head>
 <body>
 <center>
-<form action="/Product/editProduct" method="post">
+<form action="/product/edit" method="post">
         <input name="product" type="text" value="${product.getName()}"/><br>
         <input name="description" type="text"  value="${product.getDescription()}"><br>
         <input name="price" type="text" value="${product.getPrice()}"><br>

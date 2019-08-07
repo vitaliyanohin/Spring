@@ -45,6 +45,7 @@ public class AuthorizationController {
       model.addAttribute("email", login);
       return "index";
     }
+
     byte[] salt = currentUser.get().getSalt();
     String encryptPass = EncryptPassword.encryptPassword(pass, salt);
     if (pass.equals(repeatPassword)
@@ -54,7 +55,7 @@ public class AuthorizationController {
         user.setBasketId(userOrderService.getBasket(user).get());
       }
       model.addAttribute("user", user);
-      return "redirect:/User/UserProfile";
+      return "redirect:/user/userProfile";
     } else {
       model.addAttribute("info", "Your password not equals!");
       model.addAttribute("email", login);

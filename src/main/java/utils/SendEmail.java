@@ -21,13 +21,13 @@ public class SendEmail {
     final String username = "testuserma1488@gmail.com";
     final String password = "TestUser1488";
 
-    Properties prop = new Properties();
-    prop.put("mail.smtp.host", "smtp.gmail.com");
-    prop.put("mail.smtp.port", "587");
-    prop.put("mail.smtp.auth", "true");
-    prop.put("mail.smtp.starttls.enable", "true"); //TLS
+    Properties properties = new Properties();
+    properties.put("mail.smtp.host", "smtp.gmail.com");
+    properties.put("mail.smtp.port", "587");
+    properties.put("mail.smtp.auth", "true");
+    properties.put("mail.smtp.starttls.enable", "true"); //TLS
 
-    Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
+    Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
       protected PasswordAuthentication getPasswordAuthentication() {
         return new PasswordAuthentication(username, password);
       }

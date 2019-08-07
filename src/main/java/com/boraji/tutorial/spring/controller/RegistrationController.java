@@ -5,6 +5,7 @@ import com.boraji.tutorial.spring.service.AccountService;
 import model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,16 +22,17 @@ public class RegistrationController {
   public RegistrationController(AccountService accountService) {
     this.accountService = accountService;
   }
+  @GetMapping
+  private String getregistrationForm() {
+    return "register";
+  }
 
   @PostMapping()
   private String registation(@RequestParam("email") String email,
                              @RequestParam("pass") String pass,
-                             @RequestParam("role") String role,
+                             @RequestParam(value = "role", required = false, defaultValue = "") String role,
                              @RequestParam("repeatPassword") String repeatPassword,
                              Model model) {
-    if (role.isEmpty()) {
-      role = "user";
-    }
     Optional<User> currentUser = accountService.getUserByLogin(email);
     if (email.isEmpty() | pass.isEmpty() | repeatPassword.isEmpty()) {
       model.addAttribute("info", "empty fields!!!");

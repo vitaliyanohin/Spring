@@ -12,8 +12,7 @@ import javax.persistence.Transient;
 
 
 @Entity
-@Table(name = "user_Hibernate")
-@Component
+@Table(name = "user")
 public class User {
 
   @Id
@@ -30,7 +29,7 @@ public class User {
   @Column(name = "role")
   private String role;
 
-  @Column(name = "salt")
+  @Column(name = "salt", updatable=true, insertable=true)
   private byte[] salt;
 
   @Transient

@@ -51,8 +51,7 @@ public class RootConfig {
     properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
 
     factoryBean.setHibernateProperties(properties);
-//    factoryBean.setPackagesToScan("com.boraji.tutorial.spring.model");
-    factoryBean.setAnnotatedClasses(User.class, Product.class, Basket.class, Order.class);
+    factoryBean.setPackagesToScan(User.class.getPackage().getName());
     return factoryBean;
   }
 

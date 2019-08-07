@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/User/updateUser" method="post">
+<form action="/user/update" method="post">
     Email <input name="email" type="email" value="${user.getEmail()}"/><br>
     Password <input name="pass" id="password" type="password" ><br>
     Repeat password <input name="repeatPassword" id="repeatPassword" type="password"><br>

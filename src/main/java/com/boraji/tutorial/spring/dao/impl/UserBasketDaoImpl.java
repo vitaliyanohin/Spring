@@ -22,7 +22,7 @@ public class UserBasketDaoImpl implements UserBoxDao {
   }
 
   @Override
-  public List<Product> getProductsFromUserBox(User user) {
+  public List<Product> getProductsFromUserBasket(User user) {
     Query query = sessionFactory.getCurrentSession().createQuery(GET_BASKET);
     query.setParameter("id", user);
     Basket basket = (Basket) query.uniqueResult();

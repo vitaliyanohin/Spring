@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "basket_Hibernate")
+@Table(name = "basket")
 public class Basket {
 
   @Id

@@ -49,7 +49,7 @@ public class UserOrderServiceImpl implements UserOrderService {
 
   @Transactional
   @Override
-  public void createAndAddUserBasketInDb(User user) {
+  public void addUserBasket(User user) {
     Basket newBasket = new Basket(new ArrayList<>(), user);
     userBoxDao.addUserBasketInDb(newBasket);
     user.setBasketId(newBasket);
@@ -57,8 +57,8 @@ public class UserOrderServiceImpl implements UserOrderService {
 
   @Transactional
   @Override
-  public List<Product> getProductsFromUserBox(User user) {
-    return userBoxDao.getProductsFromUserBox(user);
+  public List<Product> getProductsFromUserBasket(User user) {
+    return userBoxDao.getProductsFromUserBasket(user);
   }
 
   @Transactional

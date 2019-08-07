@@ -14,7 +14,7 @@
 <body>
 <center>
     <c:out value="${info}"/>
-    <form action="index" method="post"  modelAttribute="user">
+    <form action="index" method="post">
         Email <input name="email" type="email" value="${email}"/><br>
         Password <input name="pass" id="password" type="password"><br>
         Repeat password <input name="repeatPassword" id="repeatPassword" type="password"><br>
@@ -22,11 +22,11 @@
         <button type="submit" formaction="register" formmethod="post">Sing up</button><br>
     </form>
 
-    <button type="submit" formaction="/User/AllUsers" formmethod="post"> All Users</button><br>
+    <button type="submit" formaction="/user/all" formmethod="post"> All Users</button><br>
     <a href="register"> Registration </a><br>
-    <a href="/Product/product"> New Product </a><br>
-    <a href="/User/AllUsers"> All Users </a><br>
-    <a href="/Product/allProducts"> All Products </a> <br>
+    <a href="/product"> New Product </a><br>
+    <a href="/user/all"> All Users </a><br>
+    <a href="/product/all"> All Products </a> <br>
 </center>
 </body>
 </html>

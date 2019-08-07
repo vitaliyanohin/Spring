@@ -15,8 +15,8 @@
 <center> <h2> <c:out value="${info}"/> </h2> </center>
 <center>
     <h2> Your Profile:</h2>
-    <a href="/Product/product"> New Product </a><br>
-    <a href="/Product/allProducts"> All Products </a> <br>
+    <a href="/product/create"> New Product </a><br>
+    <a href="/product/all"> All Products </a> <br>
     <a href="myOrders"> My Orders </a> <br>
         <c:if  test="${user.getRole() eq 'admin'}" >
     <h3> Add NEW USER:</h3>
@@ -27,7 +27,7 @@
         <input type="radio" name="role" value="user">Role: user<Br>
         <input type="radio" name="role" value="admin"> Role: admin<Br>
         <button type="submit"> Submit </button><br>
-        <button type="submit" formaction="/User/AllUsers" formmethod="get">All Users</button><br>
+        <button type="submit" formaction="/user/all" formmethod="get">All Users</button><br>
     </form>
         </c:if>
 </body>

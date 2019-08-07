@@ -21,7 +21,7 @@ import java.util.List;
 
 @Controller
 @SessionAttributes("code")
-@RequestMapping("/Confirmation")
+@RequestMapping("/confirmation")
 public class OrderConfirmationController {
 
   private ProductService productService;
@@ -39,13 +39,13 @@ public class OrderConfirmationController {
   }
 
   private void filter(Model model, User user) {
-    List<Product> productList = userOrderService.getProductsFromUserBox(user);
+    List<Product> productList = userOrderService.getProductsFromUserBasket(user);
     Double totalPrice = productService.orderTotalPrice(productList);
     model.addAttribute("productList", productList);
     model.addAttribute("totalPrice", totalPrice);
   }
 
-  @GetMapping("/prepareUserOrder")
+  @GetMapping("/userOrder")
   private String prepareUserOrder(@SessionAttribute("user") User user, Model model) {
     filter(model, user);
     return "confirmOrder";

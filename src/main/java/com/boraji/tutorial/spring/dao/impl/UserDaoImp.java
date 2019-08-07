@@ -4,6 +4,7 @@ import com.boraji.tutorial.spring.dao.UserDao;
 import model.User;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -17,27 +18,23 @@ import java.util.Optional;
 public class UserDaoImp implements UserDao {
 
   private final SessionFactory sessionFactory;
-  private JdbcTemplate jdbcTemplate;
 
   @Autowired
   public UserDaoImp(SessionFactory sessionFactory) {
     this.sessionFactory = sessionFactory;
   }
 
-  @Autowired
-  public void setDataSource(DataSource dataSource) {
-    this.jdbcTemplate = new JdbcTemplate(dataSource);
-  }
-
   @Override
   public Optional<User> getUserByLogin(String login) {
-    User user = jdbcTemplate.queryForObject("SELECT * FROM user_hibernate WHERE email = ?", new Object[]{login}, ROW_MAPPER);
-    return Optional.ofNullable(user);
+    Query query =sessionFactory.getCurrentSession().createQuery("FROM User WHERE email = :email ");
+    query.setParameter("email", login);
+    return query.uniqueResultOptional();
   }
 
   @Override
   public List<User> getAllUsers() {
-    @SuppressWarnings("unchecked") TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("FROM User");
+    @SuppressWarnings("unchecked")
+    TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("FROM User");
     return query.getResultList();
   }
 

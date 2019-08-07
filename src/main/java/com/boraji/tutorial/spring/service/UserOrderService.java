@@ -14,9 +14,9 @@ public interface UserOrderService {
 
   void addProductToBasket(User user, Long id);
 
-  void createAndAddUserBasketInDb(User user);
+  void addUserBasket(User user);
 
   Optional<Basket> getBasket(User user);
 
-  List<Product> getProductsFromUserBox(User user);
+  List<Product> getProductsFromUserBasket(User user);
 }

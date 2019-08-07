@@ -13,5 +13,5 @@ public interface UserBoxDao {
 
   Optional<Basket> getBasket(User user);
 
-  List<Product> getProductsFromUserBox(User user);
+  List<Product> getProductsFromUserBasket(User user);
 }

@@ -39,4 +39,11 @@ public class EncryptPassword {
     secureRandom.nextBytes(salt);
     return salt;
   }
+
+  public static void main(String[] args) {
+    byte [] salt = EncryptPassword.getSalt();
+    System.out.println(encryptPassword("123", salt));
+    System.out.println(salt);
+    System.out.println();
+  }
 }

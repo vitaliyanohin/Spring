@@ -28,14 +28,14 @@
             <td> ${currentProduct.getDescription()}</td>
             <td> ${currentProduct.getPrice()}</td>
             <td>
-                <form action="/Product/addProductInBasket" method="get">
+                <form action="/product/basket/add" method="get">
                     <button name="addInBox" type="submit" value="${currentProduct.getId()}">Add in Box</button>
                 </form>
                 <c:if test="${user.getRole() eq 'admin'}">
-                <form action="/Product/delete" method="post">
+                <form action="/product/delete" method="post">
                     <button name="delete" type="submit" value="${currentProduct.getId()}">Delete</button>
                 </form>
-                <form action="/Product/editProductForm" method="get">
+                <form action="/product/edit" method="get">
                     <button name="edit" type="submit" value="${currentProduct.getId()}">Edit</button>
                 </form>
             </td>
@@ -44,16 +44,16 @@
         </tr>
         </c:forEach>
     </table>
-    <form action="/Confirmation/prepareUserOrder">
+    <form action="/confirmation/userOrder">
         <button type="submit"> Confirm order</button>
     </form>
     <c:if test="${user.getRole() eq 'admin'}">
     <center>
-        <form action="newProduct" method="post">
-            <a href="newProduct"> NewProduct </a><br>
+        <form action="/product/create" method="get">
+            <a href="/product/create"> NewProduct </a><br>
 
-            <form action="allUsers" method="post">
-                <a href="allUsers"> All Users </a><br>
+            <form action="/user/all" method="post">
+                <a href="/user/all"> All Users </a><br>
             </form>
             </c:if>
 </body>

@@ -29,7 +29,7 @@
     </table>
     <center><h2>Total Price: ${totalPrice} </h2></center>
         <center><h2>Confirm Order:</h2></center>
-    <form action="/Confirmation/getConfirmCode" method="get" >
+    <form action="/confirmation/getConfirmCode" method="get" >
        Email <input name="email" type="email" value="${email}" ><br>
         Address <input name="address" type="text" value="${address}"><br>
         <input name="totalPrice"  type="hidden" value="${totalPrice}" />
@@ -37,7 +37,7 @@
         <button name="totalPrice" type="submit" > Get Confirm Code </button><br>
     </form>
 <center><h2>Confirm Code:</h2></center>
-    <form action="/Confirmation/confirmOrder" method="post">
+    <form action="/confirmation/confirmOrder" method="post">
         Code <input name="code" type="text" ><br>
         <input name="email"  type="hidden" value="${email}" />
         <input name="address" type="hidden" value="${address}"  />

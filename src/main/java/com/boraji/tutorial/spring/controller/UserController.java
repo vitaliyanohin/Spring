@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/User")
+@RequestMapping("/user")
 public class UserController {
 
   private final AccountService accountService;
@@ -24,13 +24,13 @@ public class UserController {
     this.accountService = accountService;
   }
 
-  @GetMapping("/UserProfile")
+  @GetMapping("/userProfile")
   private String registation(@SessionAttribute("user") User user, Model model) {
     model.addAttribute("user", user);
     return "UserProfile";
   }
 
-  @GetMapping("/AllUsers")
+  @GetMapping("/all")
   private String allUsers(Model model) {
     if (!accountService.getAllUsers().isEmpty()) {
       List<User> allUserList = accountService.getAllUsers();
@@ -44,10 +44,10 @@ public class UserController {
   @PostMapping("/delete")
   private String deleteUser(@RequestParam("delete") Long userId) {
     accountService.deleteUser(userId);
-    return "redirect:/User/AllUsers";
+    return "redirect:/user/all";
   }
 
-  @GetMapping("/updateUserJSP")
+  @GetMapping("/update")
   private String getUpdateForm(@RequestParam("edit") Long userId, Model model) {
     Optional<User> currentUser = accountService.getUserById(userId);
     if (currentUser.isPresent()) {
@@ -58,7 +58,7 @@ public class UserController {
     return "redirect:/User/AllUsers";
   }
 
-  @PostMapping("/updateUser")
+  @PostMapping("/update")
   private String updateUser(@RequestParam("edit") Long userId,
                             @RequestParam("email") String login,
                             @RequestParam("pass") String pass,
@@ -75,6 +75,6 @@ public class UserController {
       user.setRole(role);
     }
     accountService.saveOrUpdateUser(user);
-    return "redirect:/User/AllUsers";
+    return "redirect:/user/all";
   }
 }

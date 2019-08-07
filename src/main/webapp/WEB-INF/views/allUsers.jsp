@@ -14,8 +14,8 @@
 <body>
 <form action="register" method="post">
     <a href="register"> Registration </a> <br>
-    <form action="allProducts" method="post">
-        <a href="allProducts"> All Product </a><br>
+    <form action="all" method="post">
+        <a href="all"> All Product </a><br>
     </form>
     <center>
         <h2> Список пользователей:</h2>
@@ -29,12 +29,12 @@
                 <td> ${currentUser.getEmail()}</td>
                 <td> ${currentUser.getPassword()}</td>
                 <td>
-                    <form action="/User/delete" method="post">
+                    <form action="/user/delete" method="post">
                         <button name="delete" type="submit"
                                 value="${currentUser.getId()}">Delete
                         </button>
                     </form>
-                    <form action="/User/updateUserJSP" method="get">
+                    <form action="/user/update" method="get">
                         <button name="edit" type="submit"
                                 value="${currentUser.getId()}">Edit
                         </button>

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/Product")
+@RequestMapping("/product")
 public class ProductController {
 
   private ProductService productService;
@@ -27,13 +27,13 @@ public class ProductController {
     this.userOrderService = userOrderService;
   }
 
-  @GetMapping("/product")
+  @GetMapping("/create")
   private String productForm() {
     return "newProduct";
   }
 
-  @PostMapping("/newProduct")
-  private String newProduct(@RequestParam("product") String product,
+  @PostMapping("/create")
+  private String create(@RequestParam("product") String product,
                             @RequestParam("description") String description,
                             @RequestParam("price") Double price,
                             Model model) {
@@ -43,7 +43,7 @@ public class ProductController {
     return "UserProfile";
   }
 
-  @GetMapping("/allProducts")
+  @GetMapping("/all")
   private String allUsers(Model model) {
     if (!productService.getAllProducts().isEmpty()) {
       List<Product> allProductList = productService.getAllProducts();
@@ -54,25 +54,25 @@ public class ProductController {
     return "index";
   }
 
-  @GetMapping("/addProductInBasket")
+  @GetMapping("/basket/add")
   private String addProductInBasket(@SessionAttribute("user") User user,
                                     @RequestParam("addInBox") Long productId,
                                     Model model) {
     if (user.getBasketId() == null) {
-      userOrderService.createAndAddUserBasketInDb(user);
+      userOrderService.addUserBasket(user);
       model.addAttribute("user", user);
     }
     userOrderService.addProductToBasket(user, productId);
-    return "redirect:/Product/allProducts";
+    return "redirect:/product/all";
   }
 
   @PostMapping("/delete")
   private String deleteUser(@RequestParam("delete") Long productId) {
     productService.deleteProduct(productId);
-    return "redirect:/Product/allProducts";
+    return "redirect:/product/all";
   }
 
-  @GetMapping("/editProductForm")
+  @GetMapping("/edit")
   private String deleteProductForm(@RequestParam("edit") Long productId, Model model) {
     Optional<Product> currentProduct = productService.getProductById(productId);
     if (currentProduct.isPresent()) {
@@ -80,10 +80,10 @@ public class ProductController {
       model.addAttribute("product", product);
       return "editProduct";
     }
-    return "redirect:/Product/allProducts";
+    return "redirect:/product/all";
   }
 
-  @PostMapping("/editProduct")
+  @PostMapping("/edit")
   private String editProduct(@RequestParam("edit") Long productId,
                              @RequestParam("product") String productName,
                              @RequestParam("description") String description,
@@ -93,6 +93,6 @@ public class ProductController {
     product.setDescription(description);
     product.setPrice(price);
     productService.saveOrUpdateProduct(product);
-    return "redirect:/Product/allProducts";
+    return "redirect:/product/all";
   }
 }
