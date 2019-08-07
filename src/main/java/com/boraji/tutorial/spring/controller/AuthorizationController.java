@@ -39,13 +39,14 @@ public class AuthorizationController {
                           @RequestParam("pass") String pass,
                           @RequestParam("repeatPassword") String repeatPassword,
                           Model model) {
-    String encryptPass = EncryptPassword.encryptPassword(pass).orElse("").toString();
     Optional<User> currentUser = accountService.getUserByLogin(login);
     if (!currentUser.isPresent()) {
       model.addAttribute("info", "User exists, pls Sing UP!");
       model.addAttribute("email", login);
       return "index";
     }
+    byte[] salt = currentUser.get().getSalt();
+    String encryptPass = EncryptPassword.encryptPassword(pass, salt);
     if (pass.equals(repeatPassword)
             & currentUser.get().getPassword().equals(encryptPass)) {
       user = accountService.getUserByLogin(user.getEmail()).get();

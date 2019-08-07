@@ -30,6 +30,9 @@ public class User {
   @Column(name = "role")
   private String role;
 
+  @Column(name = "salt")
+  private byte[] salt;
+
   @Transient
   private Basket basket = null;
 
@@ -91,5 +94,13 @@ public class User {
 
   public void setRole(String role) {
     this.role = role;
+  }
+
+  public byte[] getSalt() {
+    return salt;
+  }
+
+  public void setSalt(byte[] salt) {
+    this.salt = salt;
   }
 }

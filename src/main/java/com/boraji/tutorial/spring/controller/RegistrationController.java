@@ -41,8 +41,10 @@ public class RegistrationController {
       return "index";
     }
     if (pass.equals(repeatPassword)) {
-      pass = EncryptPassword.encryptPassword(pass).get().toString();
+      byte [] salt = EncryptPassword.getSalt();
+      pass = EncryptPassword.encryptPassword(pass, salt);
       User userProfile = new User(email, pass, role);
+      userProfile.setSalt(salt);
       accountService.addUser(userProfile);
       return "redirect:/User/UserProfile";
     } else {
