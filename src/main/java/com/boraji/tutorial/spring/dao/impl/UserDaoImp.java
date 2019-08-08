@@ -26,7 +26,7 @@ public class UserDaoImp implements UserDao {
 
   @Override
   public Optional<User> getUserByLogin(String login) {
-    Query query =sessionFactory.getCurrentSession().createQuery("FROM User WHERE email = :email ");
+    Query query = sessionFactory.getCurrentSession().createQuery("FROM User WHERE email = :email ");
     query.setParameter("email", login);
     return query.uniqueResultOptional();
   }
