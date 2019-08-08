@@ -19,7 +19,7 @@
         Password <input name="pass" id="password" type="password"><br>
         Repeat password <input name="repeatPassword" id="repeatPassword" type="password"><br>
         <button type="submit"> Sing in</button><br>
-        <button type="submit" formaction="register" formmethod="post">Sing up</button><br>
+        <button type="submit" formaction="/register" formmethod="post">Sing up</button><br>
     </form>
 
     <button type="submit" formaction="/user/all" formmethod="post"> All Users</button><br>
