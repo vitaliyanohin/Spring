@@ -38,7 +38,6 @@ public class ProductServiceImpl implements ProductService {
     productDao.saveOrUpdateProduct(name);
   }
 
-  @Transactional
   @Override
   public double orderTotalPrice(List<Product> productList) {
     return productList.stream().flatMapToDouble(x -> DoubleStream.of(x.getPrice())).sum();
