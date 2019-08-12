@@ -12,7 +12,7 @@
     <title> New Product </title>
 </head>
 <body>
-<form  action="/product/create" method="post">
+<form  action="/product/admin/create" method="post">
     <input name="product" type="text"/>
     <input name="description" type="text">
     <input name="price" type="text">

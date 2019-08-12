@@ -5,6 +5,7 @@ import com.boraji.tutorial.spring.service.UserOrderService;
 import model.Order;
 import model.Product;
 import model.User;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,13 +47,13 @@ public class OrderConfirmationController {
   }
 
   @GetMapping("/userOrder")
-  private String prepareUserOrder(@SessionAttribute("user") User user, Model model) {
+  private String prepareUserOrder(@AuthenticationPrincipal User user, Model model) {
     filter(model, user);
     return "confirmOrder";
   }
 
   @GetMapping("/getConfirmCode")
-  private String getConfirmOrder(@SessionAttribute("user") User user,
+  private String getConfirmOrder(@AuthenticationPrincipal User user,
                                  @RequestParam("email") String email,
                                  @RequestParam("address") String address,
                                  @RequestParam("totalPrice") Double totalPrice,
@@ -67,7 +68,7 @@ public class OrderConfirmationController {
   }
 
   @PostMapping("/confirmOrder")
-  private String confirmOrder(@SessionAttribute("user") User user,
+  private String confirmOrder(@AuthenticationPrincipal User user,
                               @SessionAttribute("code") String code,
                               @RequestParam("email") String email,
                               @RequestParam("address") String address,

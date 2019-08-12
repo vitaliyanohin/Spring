@@ -21,7 +21,8 @@ public class ProductDaoImpl implements ProductDao {
 
   @Override
   public Optional<Product> getProductById(long id) {
-    return Optional.ofNullable(sessionFactory.getCurrentSession().get(Product.class, id));
+    return Optional.ofNullable(sessionFactory.getCurrentSession()
+            .get(Product.class, id));
   }
 
   @Override

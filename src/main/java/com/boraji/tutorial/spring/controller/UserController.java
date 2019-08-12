@@ -2,6 +2,8 @@ package com.boraji.tutorial.spring.controller;
 
 import com.boraji.tutorial.spring.service.AccountService;
 import model.User;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,35 +21,38 @@ import java.util.Optional;
 public class UserController {
 
   private final AccountService accountService;
+  private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-  public UserController(AccountService accountService) {
+  public UserController(AccountService accountService,
+                        BCryptPasswordEncoder bCryptPasswordEncoder) {
     this.accountService = accountService;
+    this.bCryptPasswordEncoder = bCryptPasswordEncoder;
   }
 
   @GetMapping("/userProfile")
-  private String registation(@SessionAttribute("user") User user, Model model) {
+  private String registation(@AuthenticationPrincipal User user, Model model) {
     model.addAttribute("user", user);
     return "UserProfile";
   }
 
-  @GetMapping("/all")
+  @GetMapping("/admin/all")
   private String allUsers(Model model) {
     if (!accountService.getAllUsers().isEmpty()) {
       List<User> allUserList = accountService.getAllUsers();
       model.addAttribute("allUserList", allUserList);
       return "allUsers";
     }
-    model.addAttribute("info", "Empty user list!");
+    model.addAttribute("inform", "Empty user list!");
     return "index";
   }
 
-  @PostMapping("/delete")
+  @PostMapping("/admin/delete")
   private String deleteUser(@RequestParam("delete") Long userId) {
     accountService.deleteUser(userId);
     return "redirect:/user/all";
   }
 
-  @GetMapping("/update")
+  @GetMapping("/admin/update")
   private String getUpdateForm(@RequestParam("edit") Long userId, Model model) {
     Optional<User> currentUser = accountService.getUserById(userId);
     if (currentUser.isPresent()) {
@@ -69,7 +74,7 @@ public class UserController {
       user.setEmail(login);
     }
     if (pass.equals(repeatPassword) & !pass.isEmpty()) {
-      user.setPassword(EncryptPassword.encryptPassword(pass, user.getSalt()));
+      user.setPassword(bCryptPasswordEncoder.encode(pass));
     }
     if (role != null && !role.equals(user.getRole())) {
       user.setRole(role);

@@ -29,12 +29,12 @@
                 <td> ${currentUser.getEmail()}</td>
                 <td> ${currentUser.getPassword()}</td>
                 <td>
-                    <form action="/user/delete" method="post">
+                    <form action="/user/admin/delete" method="post">
                         <button name="delete" type="submit"
                                 value="${currentUser.getId()}">Delete
                         </button>
                     </form>
-                    <form action="/user/update" method="get">
+                    <form action="/user/admin/update" method="get">
                         <button name="edit" type="submit"
                                 value="${currentUser.getId()}">Edit
                         </button>

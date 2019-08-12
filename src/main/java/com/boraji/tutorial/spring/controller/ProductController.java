@@ -4,6 +4,7 @@ import com.boraji.tutorial.spring.service.ProductService;
 import com.boraji.tutorial.spring.service.UserOrderService;
 import model.Product;
 import model.User;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +28,12 @@ public class ProductController {
     this.userOrderService = userOrderService;
   }
 
-  @GetMapping("/create")
+  @GetMapping("/admin/create")
   private String productForm() {
     return "newProduct";
   }
 
-  @PostMapping("/create")
+  @PostMapping("/admin/create")
   private String create(@RequestParam("product") String product,
                             @RequestParam("description") String description,
                             @RequestParam("price") Double price,
@@ -44,7 +45,7 @@ public class ProductController {
   }
 
   @GetMapping("/all")
-  private String allUsers(Model model) {
+  private String allProduct(Model model) {
     if (!productService.getAllProducts().isEmpty()) {
       List<Product> allProductList = productService.getAllProducts();
       model.addAttribute("allProductList", allProductList);
@@ -55,7 +56,7 @@ public class ProductController {
   }
 
   @GetMapping("/basket/add")
-  private String addProductInBasket(@SessionAttribute("user") User user,
+  private String addProductInBasket(@AuthenticationPrincipal User user,
                                     @RequestParam("addInBox") Long productId,
                                     Model model) {
     if (user.getBasketId() == null) {
@@ -66,13 +67,13 @@ public class ProductController {
     return "redirect:/product/all";
   }
 
-  @PostMapping("/delete")
+  @PostMapping("/admin/delete")
   private String deleteUser(@RequestParam("delete") Long productId) {
     productService.deleteProduct(productId);
     return "redirect:/product/all";
   }
 
-  @GetMapping("/edit")
+  @GetMapping("/admin/edit")
   private String deleteProductForm(@RequestParam("edit") Long productId, Model model) {
     Optional<Product> currentProduct = productService.getProductById(productId);
     if (currentProduct.isPresent()) {
@@ -83,7 +84,7 @@ public class ProductController {
     return "redirect:/product/all";
   }
 
-  @PostMapping("/edit")
+  @PostMapping("/admin/edit")
   private String editProduct(@RequestParam("edit") Long productId,
                              @RequestParam("product") String productName,
                              @RequestParam("description") String description,

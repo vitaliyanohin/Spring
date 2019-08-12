@@ -3,6 +3,7 @@ package com.boraji.tutorial.spring.controller;
 import com.boraji.tutorial.spring.service.AccountService;
 import com.boraji.tutorial.spring.service.UserOrderService;
 import model.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +34,7 @@ public class AuthorizationController {
     return new User();
   }
 
-  @PostMapping("/index")
+  @PostMapping("/index2")
   private String doLogin(@ModelAttribute("user") User user,
                           @RequestParam("email") String login,
                           @RequestParam("pass") String pass,
