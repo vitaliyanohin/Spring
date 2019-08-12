@@ -22,7 +22,7 @@ public class IndexController {
       return "redirect:/login";
     } else {
       if (userOrderService.getBasket(user).isPresent()) {
-        user.setBasketId(userOrderService.getBasket(user).get());
+        user.setBasket(userOrderService.getBasket(user).get());
       }
       return "redirect:/user/userProfile";
     }

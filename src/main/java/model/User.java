@@ -60,15 +60,15 @@ public class User implements UserDetails {
     return id;
   }
 
-  public Basket getBasketId() {
+  public Basket getBasket() {
     return basket;
   }
 
-  public void setBasketId(Basket basket) {
+  public void setBasket(Basket basket) {
     this.basket = basket;
   }
 
-  public void dropBasketId() {
+  public void dropBasket() {
     basket = null;
   }
 

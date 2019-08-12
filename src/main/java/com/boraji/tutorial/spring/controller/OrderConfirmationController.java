@@ -75,9 +75,9 @@ public class OrderConfirmationController {
                               @RequestParam("code") String confirmCodeFromUser,
                               Model model) {
     if (confirmCodeFromUser.equals(code)) {
-      Order order = new Order(user, user.getBasketId(), address);
+      Order order = new Order(user, user.getBasket(), address);
       userOrderService.addOrderToDb(order);
-      user.dropBasketId();
+      user.dropBasket();
       model.addAttribute("user", user);
       model.addAttribute("info", "request has been sent! TY!");
       return "UserProfile";
