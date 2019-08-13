@@ -19,7 +19,7 @@ public class IndexController {
   @GetMapping({ "/" })
   public String index(@AuthenticationPrincipal User user, Model model) {
     if (user == null) {
-      return "redirect:/login";
+      return "redirect:/index";
     } else {
       if (userOrderService.getBasket(user).isPresent()) {
         user.setBasket(userOrderService.getBasket(user).get());
