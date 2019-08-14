@@ -19,8 +19,8 @@ import java.util.Optional;
 @RequestMapping("/product")
 public class ProductController {
 
-  private ProductService productService;
-  private UserOrderService userOrderService;
+  private final ProductService productService;
+  private final UserOrderService userOrderService;
 
   public ProductController(ProductService productService, UserOrderService userOrderService) {
     this.productService = productService;

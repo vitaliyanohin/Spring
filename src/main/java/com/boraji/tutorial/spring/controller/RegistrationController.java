@@ -19,7 +19,7 @@ import java.util.Optional;
 public class RegistrationController {
 
   private final AccountService accountService;
-  private BCryptPasswordEncoder bCryptPasswordEncoder;
+  private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
   public RegistrationController(AccountService accountService,
                                 BCryptPasswordEncoder bCryptPasswordEncoder) {

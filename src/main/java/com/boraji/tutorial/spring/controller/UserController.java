@@ -21,7 +21,7 @@ import java.util.Optional;
 public class UserController {
 
   private final AccountService accountService;
-  private BCryptPasswordEncoder bCryptPasswordEncoder;
+  private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
   public UserController(AccountService accountService,
                         BCryptPasswordEncoder bCryptPasswordEncoder) {

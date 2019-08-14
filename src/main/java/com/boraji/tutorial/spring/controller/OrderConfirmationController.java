@@ -25,8 +25,8 @@ import java.util.List;
 @RequestMapping("/confirmation")
 public class OrderConfirmationController {
 
-  private ProductService productService;
-  private UserOrderService userOrderService;
+  private final ProductService productService;
+  private final UserOrderService userOrderService;
 
   public OrderConfirmationController(ProductService productService,
                                      UserOrderService userOrderService) {
