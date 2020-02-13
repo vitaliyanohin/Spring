@@ -3,6 +3,7 @@ package com.boraji.tutorial.spring.controller;
 
 import com.boraji.tutorial.spring.service.AccountService;
 import model.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +19,12 @@ import java.util.Optional;
 public class RegistrationController {
 
   private final AccountService accountService;
+  private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-  public RegistrationController(AccountService accountService) {
+  public RegistrationController(AccountService accountService,
+                                BCryptPasswordEncoder bCryptPasswordEncoder) {
     this.accountService = accountService;
+    this.bCryptPasswordEncoder = bCryptPasswordEncoder;
   }
   @GetMapping
   private String getregistrationForm() {
@@ -43,12 +47,10 @@ public class RegistrationController {
       return "index";
     }
     if (pass.equals(repeatPassword)) {
-      byte [] salt = EncryptPassword.getSalt();
-      pass = EncryptPassword.encryptPassword(pass, salt);
+      pass = bCryptPasswordEncoder.encode(pass);
       User userProfile = new User(email, pass, role);
-      userProfile.setSalt(salt);
       accountService.addUser(userProfile);
-      return "redirect:/User/UserProfile";
+      return "redirect:/user/userProfile";
     } else {
       model.addAttribute("info", "Your password not equals!");
       model.addAttribute("email", email);

@@ -32,10 +32,10 @@
                     <button name="addInBox" type="submit" value="${currentProduct.getId()}">Add in Box</button>
                 </form>
                 <c:if test="${user.getRole() eq 'admin'}">
-                <form action="/product/delete" method="post">
+                <form action="/product/admin/delete" method="post">
                     <button name="delete" type="submit" value="${currentProduct.getId()}">Delete</button>
                 </form>
-                <form action="/product/edit" method="get">
+                <form action="/product/admin/edit" method="get">
                     <button name="edit" type="submit" value="${currentProduct.getId()}">Edit</button>
                 </form>
             </td>
@@ -49,11 +49,11 @@
     </form>
     <c:if test="${user.getRole() eq 'admin'}">
     <center>
-        <form action="/product/create" method="get">
-            <a href="/product/create"> NewProduct </a><br>
+        <form action="/product/admin/create" method="get">
+            <a href="/product/admin/create"> NewProduct </a><br>
 
-            <form action="/user/all" method="post">
-                <a href="/user/all"> All Users </a><br>
+            <form action="/user/admin/all" method="post">
+                <a href="/user/admin/all"> All Users </a><br>
             </form>
             </c:if>
 </body>

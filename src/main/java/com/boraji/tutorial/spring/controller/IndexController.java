@@ -1,21 +1,30 @@
 package com.boraji.tutorial.spring.controller;
 
-import com.boraji.tutorial.spring.service.UserService;
+import com.boraji.tutorial.spring.service.UserOrderService;
+import model.User;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class IndexController {
 
-  private final UserService userService;
+  private final UserOrderService userOrderService;
 
-  public IndexController(UserService userService) {
-    this.userService = userService;
+  public IndexController(UserOrderService userOrderService) {
+    this.userOrderService = userOrderService;
   }
 
-  @RequestMapping(path = {"/"}, method = RequestMethod.GET)
-  public String indexForm() {
-    return "index";
+  @GetMapping({ "/" })
+  public String index(@AuthenticationPrincipal User user, Model model) {
+    if (user == null) {
+      return "redirect:/index";
+    } else {
+      if (userOrderService.getBasket(user).isPresent()) {
+        user.setBasket(userOrderService.getBasket(user).get());
+      }
+      return "redirect:/user/userProfile";
+    }
   }
 }

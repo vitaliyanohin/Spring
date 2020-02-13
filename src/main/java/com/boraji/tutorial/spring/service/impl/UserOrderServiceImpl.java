@@ -52,7 +52,7 @@ public class UserOrderServiceImpl implements UserOrderService {
   public void addUserBasket(User user) {
     Basket newBasket = new Basket(new ArrayList<>(), user);
     userBoxDao.addUserBasketInDb(newBasket);
-    user.setBasketId(newBasket);
+    user.setBasket(newBasket);
   }
 
   @Transactional
